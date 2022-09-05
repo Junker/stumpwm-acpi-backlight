@@ -40,18 +40,39 @@
 (defun set-brightness-pct (pct)
   (set-brightness (pct-to-val (max 0 (min 100 pct)))))
 
+(defun inc-brightness (step)
+  (set-brightness-pct (+ (get-brightness-pct) step)))
+
+(defun dec-brightness (step)
+  (set-brightness-pct (- (get-brightness-pct) step)))
+
 (defun modeline (ml)
   (declare (ignore ml))
-  (format nil "~A%" (get-brightness-pct)))
+  (format nil "~A%" (get-brightness-pct))
+  :ml-acpi-backlight-on-click nil)
 
+(defun ml-on-click (code id &rest rest)
+  (declare (ignore rest))
+  (declare (ignore id))
+  (let ((button (stumpwm::decode-button-code code)))
+    (case button
+      ((:wheel-up)
+       (inc-brightness *step*))
+      ((:wheel-down)
+       (dec-brightness *step*))))
+  (stumpwm::update-all-mode-lines))
+
+
+(when (fboundp 'stumpwm::register-ml-on-click-id) ;check in case of old stumpwm version
+  (register-ml-on-click-id :ml-acpi-backlight-on-click #'ml-on-click))
 
 (defcommand backlight-up () ()
   "Increase the brightness by N percents"
-  (set-brightness-pct (+ (get-brightness-pct) *step*)))
+  (inc-brightness *step*))
 
 (defcommand backlight-down () ()
   "Decrease the brightness by N percents"
-  (set-brightness-pct (- (get-brightness-pct) *step*)))
+  (dec-brightness *step*))
 
 (defcommand backlight-set (pct) ((:string "Brightness percentage:"))
   "Set backlight brightness"

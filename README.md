@@ -45,3 +45,8 @@ ls /sys/class/backlight
 ### Modeline
 
 %Q - backlight formatter
+
+#### Modeline mouse interaction
+
+- **wheel up**: brightness up
+- **wheel down**: brightness down
