@@ -48,8 +48,10 @@
 
 (defun modeline (ml)
   (declare (ignore ml))
-  (format nil "~A%" (get-brightness-pct))
-  :ml-acpi-backlight-on-click nil)
+  (let ((ml-str (format nil "~A%" (get-brightness-pct))))
+    (if (fboundp 'stumpwm::format-with-on-click-id) ;check in case of old stumpwm version
+        (format-with-on-click-id ml-str :ml-acpi-backlight-on-click nil)
+        ml-str)))
 
 (defun ml-on-click (code id &rest rest)
   (declare (ignore rest))
