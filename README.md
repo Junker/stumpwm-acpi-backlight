@@ -5,7 +5,7 @@ ACPI backlight control module for StumpWM.
 ## Installation
 
 ```bash
-ls ~/.stumpwm.d/modules/
+cd ~/.stumpwm.d/modules/
 git clone https://github.com/Junker/stumpwm-acpi-backlight acpi-backlight
 ```
 
