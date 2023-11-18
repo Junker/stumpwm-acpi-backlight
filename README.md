@@ -33,7 +33,7 @@ add lisp code:
 
 ### Additional commands
 
-- backlight-set value
+- `backlight-set value`
 
 ### Additional functions
 
