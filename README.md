@@ -18,7 +18,7 @@ intel_backlight
 
 add lisp code:
 
-```lisp
+```common-lisp
 (stumpwm:add-to-load-path "~/.stumpwm.d/modules/acpi-backlight")
 (load-module "acpi-backlight")
 (acpi-backlight:init "intel_backlight") ; use name of your ACPI backlight device
@@ -26,7 +26,7 @@ add lisp code:
 
 ## Usage
 
-```lisp
+```common-lisp
   (define-key *top-map* (kbd "XF86MonBrightnessUp") "backlight-up")
   (define-key *top-map* (kbd "XF86MonBrightnessDown") "backlight-down")
 ```
@@ -37,18 +37,18 @@ add lisp code:
 
 ### Additional functions
 
-- get-brightness
-- get-brightness-pct
-- set-brightness
-- set-brightness-pct
+- `get-brightness`
+- `get-brightness-pct`
+- `set-brightness`
+- `set-brightness-pct`
 
 ### Parameters
 
-- acpi-backlight:\*step\* - brightness increase/decrease percent step
+- `acpi-backlight:*step*` - brightness increase/decrease percent step
 
 ### Modeline
 
-%Q - backlight formatter
+`%Q` - backlight formatter
 
 #### Modeline mouse interaction
 
